@@ -25,26 +25,36 @@ const shoot = (playerSelection, computerSelection) => {
   } else if (playerSelection === "paper" && computerSelection === "scissors") {
     round = "you Lose! Scissors beats Paper!";
     ComputerScore += 1;
-  } else if (playerScore === "scissors" && computerSelection === "rock") {
+  } else if (playerSelection === "scissors" && computerSelection === "rock") {
     round = "you Lose! Rock beats Scissors!";
     ComputerScore += 1;
-  } else if (playerScore === "scissors" && computerSelection === "paper") {
+  } else if (playerSelection === "scissors" && computerSelection === "paper") {
     round = "you win!";
     playerScore += 1;
   }
+  if (playerScore == 5) {
+    playerScore = 0;
+    ComputerScore = 0;
+    return "You are the overall winner";
+  } else if (ComputerScore == 5) {
+    playerScore = 0;
+    ComputerScore = 0;
+    return "you are the loser! ";
+  }
+  return `${round}  \n player ${playerScore} - ${ComputerScore} computer`;
 };
 
-for (let i = 1; i <= 5; i++) {
-  let userPick = prompt().toLocaleLowerCase();
-  shoot(userPick, getComputerChoice());
-  alert(
-    `
-    Round: ${round}
-    \n
-    score ${i} of 5 \n Player: ${playerScore} \n computer: ${ComputerScore}`
-  );
-  round = "";
-}
+// for (let i = 1; i <= 5; i++) {
+// let userPick = prompt().toLocaleLowerCase();
+
+// alert(
+//   `
+//     Round: ${round}
+//     \n
+//     score ${i} of 5 \n Player: ${playerScore} \n computer: ${ComputerScore}`
+// );
+round = "";
+// }
 
 if (playerScore === ComputerScore) {
   console.log("its a draw");
@@ -55,3 +65,23 @@ if (playerScore === ComputerScore) {
       : `computer wins ${ComputerScore}:${playerScore}`
   );
 }
+
+const result = document.createElement("h1");
+
+const body = document.getElementsByTagName("body")[0];
+
+var rockBtn = document.getElementById("rock");
+rockBtn.addEventListener("click", function (event) {
+  result.innerHTML = shoot("rock", getComputerChoice());
+  body.appendChild(result);
+});
+var paperBtn = document.getElementById("paper");
+paperBtn.addEventListener("click", function (event) {
+  result.innerHTML = shoot("paper", getComputerChoice());
+  body.appendChild(result);
+});
+var scissorsBtn = document.getElementById("scissors");
+scissorsBtn.addEventListener("click", function (event) {
+  result.innerHTML = shoot("scissors", getComputerChoice());
+  body.appendChild(result);
+});
