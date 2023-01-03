@@ -7,6 +7,7 @@ const getComputerChoice = () => {
 let playerScore = 0;
 let ComputerScore = 0;
 let round = "";
+const score = document.querySelector(".score");
 
 const shoot = (playerSelection, computerSelection) => {
   if (draw.indexOf(playerSelection) === -1) {
@@ -41,7 +42,9 @@ const shoot = (playerSelection, computerSelection) => {
     ComputerScore = 0;
     return "you are the loser! ";
   }
-  return `${round}  \n player ${playerScore} - ${ComputerScore} computer`;
+  score.innerHTML = `player ${playerScore}  computer ${ComputerScore}`;
+
+  return `${round}`;
 };
 
 // for (let i = 1; i <= 5; i++) {
